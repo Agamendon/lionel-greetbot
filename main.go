@@ -11,13 +11,12 @@ import (
 )
 
 func guildMemberAdd(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
+	log.Println("New event triggered")
 	guild, err := s.Guild(m.GuildID)
 	if err != nil {
 		log.Println("Failed to find guild: ", err)
 		return
 	}
-
-	log.Println("New member landed")
 
 	sysid := guild.SystemChannelID
 	_, err = s.ChannelMessageSend(sysid, "New Lionelian here!")
@@ -39,7 +38,7 @@ func main() {
 
 	discord.AddHandler(guildMemberAdd)
 
-	discord.Identify.Intents = discordgo.IntentsNone
+	discord.Identify.Intents = discordgo.IntentsGuildMembers
 
 	err = discord.Open()
 	if err != nil {
