@@ -17,6 +17,8 @@ func guildMemberAdd(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		return
 	}
 
+	log.Println("New member landed")
+
 	sysid := guild.SystemChannelID
 	_, err = s.ChannelMessageSend(sysid, "New Lionelian here!")
 	if err != nil {
